@@ -1,0 +1,39 @@
+﻿@model Z_Store.Models.Order
+
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<h1>Thank For Complete</h1>
+<h2>Order Number: @Model.Id</h2>
+    <div class="card">
+    <div class="row">
+        <div class="col-md-8 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col">
+                        <h4><b>Shopping Cart</b></h4>
+                    </div>
+                    @*<div class="col align-self-center text-right text-muted">@Model.orderItems.Count() Books</div>*@
+                </div>
+            </div>
+
+                @foreach (var i in @Model.OrderItems)
+                {
+                    <div class="row border-top border-bottom">
+                        <div class="row main align-items-center">
+                            <div class="col-2"><img class="img-fluid" src="@i.Book.ImageUrl"></div>
+                            <div class="col">
+                                <div class="row text-muted">@i.Book.Title</div>
+                                <div class="row">@i.Book.Language</div>
+                            </div>
+                            <div class="col"> 
+                                <a  class="border">@i.Quantity</a>
+                            </div>
+                            <div class="col">&euro; @i.Book.Price
+                            </div>
+                        </div>
+                    </div>
+                }
+            
+</div>
+</div>
+</div>

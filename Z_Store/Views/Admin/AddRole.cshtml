@@ -1,0 +1,19 @@
+﻿@model Z_Store.ViewModels.AddRoleViewModel
+
+<div class="container ">
+
+<h2>Add Role</h2>
+
+<form method="post" asp-action="addrole" >
+    <div class="form-group">
+        <label asp-for="RoleName"></label>
+        <input asp-for="RoleName" style="border:1px solid black"  class="form-controle col-6" />
+        <span asp-validation-for="RoleName"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn--green col-3">Add Role</button>
+        <a asp-action="index" asp-controller="Admin" class="btn btn--blue col-3">Back To List</a>
+    </div>
+
+</form>
+</div>

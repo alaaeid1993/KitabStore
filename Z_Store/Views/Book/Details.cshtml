@@ -1,0 +1,30 @@
+﻿@model Z_Store.Models.Book
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div class="container ">
+
+<div class="col-lg-12  align-items-stretch  h-100">
+    <div class="blog-entry " style="display:flex">
+        <a href="blog-single.html" class="block-20 img" style="background-image: url('@Model.ImageUrl');">
+        </a>
+        <div class="text p-4 bg-light">
+        <div class="meta">
+            <p><span class="fa fa-calendar"></span> @Model.DataPblish</p>
+        </div>
+        <h3 class="heading mb-3"><a href="#">@Model.Title</a></h3>
+        <p>@Model.Description</p>
+        <h4 class="heading mb-3"><a href="#">@Model.Author</a></h4>
+        <p>$@Model.Price</p>
+        <p>@Model.Language</p>
+        <p>@Model.Ssn</p>
+        </div>
+    </div>
+        <a asp-action="Index" class="btn-custom"><span class="fa fa-long-arrow-left  mr-1">Back To List</span></a>
+        <a asp-action="Edit"  asp-route-id="@Model.Id" class="btn-custom ml-2">Edit<span class="fa fa-edit ml-1"></span></a>
+</div>
+</div>

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Z_Store.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+
+    string hasimage(Book book)
+    {
+        if (book.ImageUrl != "") {
+            return "fa fa-check mr-1";
+        }
+        else {
+            return "fa fa-x";
+        }
+    }
+}
+<div class="container ">
+
+<p>
+    <a asp-action="Create" asp-controller="Book" class="btn btn-info">Add Book<i class="fa  fa-book ml-1" style="color:yellow" ></i></a>
+</p>
+<table class="table " style="text-align:center">
+    <thead>
+        <tr>
+          <th scope="col" style="color:#b7472a">Title</th>
+          <th scope="col"style="color:#b7472a">Description</th>
+          <th scope="col"style="color:#b7472a">Language</th>
+          <th scope="col"style="color:#b7472a">Ssn</th>
+          <th scope="col"style="color:#b7472a">DataPblish</th>
+          <th scope="col"style="color:#b7472a">Price</th>
+          <th scope="col"style="color:#b7472a">Author</th>
+          <th scope="col"style="color:#b7472a">ImageUrl</th>
+          <th scope="col"style="color:#b7472a">Option</th>
+        </tr>
+    </thead>
+
+
+    <tbody>
+@foreach (var item in Model) {
+        <tr  class="tr-shadow">
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td  class="desc">
+                @Html.DisplayFor(modelItem => item.Language)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ssn)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DataPblish)
+            </td>
+
+            <td>
+                <span class="status--process">
+                @Html.DisplayFor(modelItem => item.Price)
+                </span>
+            </td>
+
+             <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+             <td>
+                <i class="@hasimage(item)" style="color:blue"></i>
+            </td>
+
+            <td>
+                <div class="table-data-feature">
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="fa fa-edit mr-1"style="color:blue" ></i></a> 
+
+                        <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i  class="fa fa-bars mr-1"style="color:green"></i></a> 
+
+                        <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="fa fa-trash mr-1" style="color:red"></i></a>
+                </div>       
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+</div>

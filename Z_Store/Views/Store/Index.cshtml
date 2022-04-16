@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Z_Store.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+  
+@*@section cur{
+                <partial name="_Slide"/>
+}
+
+*@
+<!--------------------------------------------------------------------------------------------------------------------->
+
+
+<!--------------------------------------------------------------------------------------------------------------------->
+<section class="ftco-section testimony-section img" style="background-image: url('/images/back1.jpg')">
+    	<div class="overlay">
+        </div>
+      <div class="container">
+  
+        <div class="row ftco-animate" >
+          <div class="col-md-12">
+            <div class="carousel-testimony owl-carousel ftco-owl">
+                @foreach (var i in Model)
+               {
+                  <div class="item">
+                    <div class="testimony-wrap py-4">
+                	    <div class="icon d-flex align-items-center justify-content-center">
+                            <a asp-action="index" asp-controller="cart" class="fa fa-cart-plus"></a>
+                            </div>
+                      <div class="text">
+                        <p class="mb-4">@i.Description</p>
+                        <div class="d-flex align-items-center">
+                    	    <div class="user-img" style="background-image: url(@i.ImageUrl)"></div>
+                    	    <div class="pl-3">
+		                        <p class="name">@i.Title</p>
+		                        <span class="position">@i.Author</span>
+		                      </div>
+	                      </div>
+                      </div>
+                    </div>
+                  </div>
+               }
+
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+
+<!--------------------------------------------------------------------------------------------------------------------->
+<div class="container mt-5">
+
+    <div class="row justify-content-around">
+<!---------------------------------------------Start Search------------------------------------------------------------------------>
+         <div class="wrap-p">
+                <form asp-action="index">
+                       <div class="search">
+                          <input type="text" name="word" class="searchTerm" placeholder="What are you looking for?">
+                          <button type="submit" class="searchButton">
+                          <i class="fa fa-search"></i>
+                         </button>
+                       </div>
+                </form>
+         </div>
+<!---------------------------------------------------End Search------------------------------------------------------------------>
+        @foreach (var i in Model)
+        {
+        <div class="col-md-3 d-flex">
+	        <div class="product ftco-animate">
+		        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(@i.ImageUrl);">
+			        <div class="desc">
+				        <p class="meta-prod d-flex">
+					        <a asp-action="AddToCart" asp-route-id="@i.Id" asp-controller="cart" onclick="add(@i.Id)" class="d-flex align-items-center justify-content-center"><span class="flaticon-shopping-bag"></span></a>
+					        <a class="d-flex align-items-center justify-content-center"><span class="flaticon-heart"></span></a>
+					        <a asp-action="Details" asp-route-id="@i.Id" class="d-flex align-items-center justify-content-center"><span class="flaticon-visibility"></span></a>
+				        </p>
+			        </div>
+		        </div>
+		        <div class="text text-center">
+			        <span class="sale">@i.Language</span>
+			        <span class="category">@i.Author</span>
+			        <h2>@i.Title</h2>
+			        <p class="mb-0"><span class="price price-sale">$150.00</span> <span class="price">$@i.Price</span></p>
+		        </div>
+	        </div>
+        </div>
+        }
+    </div>
+</div>

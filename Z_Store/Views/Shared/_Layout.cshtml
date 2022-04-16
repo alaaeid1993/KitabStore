@@ -1,0 +1,311 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Z_Store.Models
+
+@inject SignInManager<DefaultUser> SignInManager
+@inject UserManager<DefaultUser> UserManager
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Z_Store</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+<!--------------------------------------Start Link Theme------------------------------------------------------>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,700;0,800;1,200;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/css/animate.css">
+    
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+    
+    <link rel="stylesheet" href="~/css/flaticon.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/details.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="~/css/payment.css">
+
+    
+
+    <!--------------------------------------Form Create------------------------------------------------------------->
+
+        <link href="~/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="~/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="~/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="~/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="/css/global.css" rel="stylesheet" media="all">
+
+    <!--------------------------------------Form Create------------------------------------------------------------->
+
+
+
+<!--------------------------------------End Link Theme------------------------------------------------------>
+
+<!-------------------------------------------------------------------------------------------->
+</head>
+<body>
+<!-----------------------------------------Start Info------------------------------------------>
+	<div class="wrap m-0">
+			<div class="container align-items-center">
+				<div class="row">
+					<div class="col-md-6  align-items-center" style="display:flex">
+						<p class="mb-0 phone pl-md-2">
+							<a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span> +2 01000194360</a> 
+							<a href="#"><span class="fa fa-paper-plane mr-1"></span> alaadev22@email.com</a>
+						</p>
+					</div>
+ 
+					<div class="col-md-6 justify-content-md-end" style="display:flex">
+						<div class="social-media mr-4">
+			    		<p class="mb-0 d-flex">
+			    			<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
+			    			<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+			    			<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+			    			<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
+			    		</p>
+		        </div>
+		        <div class="reg">
+		        	<p class="mb-0">
+                        @if (SignInManager.IsSignedIn(User))
+                            {
+                                <a type="submit"  asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">Log Out</a>
+                                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" > <i class="fa fa-user-circle-o ml-3 " style="color:white"></i></a>
+                            }
+                            else
+                            {
+                                <a class="mr-2"  asp-area="Identity" asp-page="/Account/Register">Sign Up</a>
+                                <a  asp-area="Identity" asp-page="/Account/Login">Login</a>
+                            }
+                            </p>
+		        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<!----------------------------------------End Info--------------------------------------------------->
+
+<!----------------------------------------Start Navbar--------------------------------------------------->
+
+	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	      <a class="navbar-brand" asp-action="index" asp-controller="store" style="color:blue">K<span style="text-transform:lowercase">itab.</span></a>
+	      <div class="order-lg-last btn-group">
+              <a asp-action="index" asp-controller="cart"  class="btn-cart dropdown-toggle dropdown-toggle-split" ><i  class="flaticon-shopping-bag" id="card" style="font-size:20px"></i></a>
+          </div>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="oi oi-menu"></span> Menu
+	      </button>
+
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a asp-action="index"asp-controller="store" class="nav-link">Store</a></li>
+	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+	          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+              	<a class="dropdown-item" href="product.html">Products</a>
+                <a class="dropdown-item" href="product-single.html">Single Product</a>
+                <a class="dropdown-item" href="cart.html">Cart</a>
+                <a class="dropdown-item" href="checkout.html">Checkout</a>
+              </div>
+            </li>
+	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+<!----------------------------------------End Navbar----------------------------------------------------->
+
+<!----------------------------------------Start Main Section----------------------------------------------------->
+
+@*@RenderSection("cur")*@
+
+<!--------------------------------------------------------------------------------------------------------------------->
+@*<section class="ftco-section testimony-section img" style="background-image: url('/images/back1.jpg')">
+    	<div class="overlay">
+        </div>
+      <div class="container">
+  
+        <div class="row ftco-animate" >
+          <div class="col-md-12">
+            <div class="carousel-testimony owl-carousel ftco-owl ">
+                @foreach (var i in Model)
+               {
+                  <div class="item">
+                    <div class="testimony-wrap ">
+                	    <div class="icon d-flex align-items-center justify-content-center">
+                            <a asp-action="index" asp-controller="cart" class="fa fa-cart-plus"></a>
+                            </div>
+                      <div class="text">
+                        <p class="mb-4">@i.Description</p>
+                        <div class="d-flex align-items-center">
+                    	    <div class="user-img" style="background-image: url(@i.ImageUrl)"></div>
+                    	    <div class="pl-3">
+		                        <p class="name">@i.Title</p>
+		                        <span class="position">@i.Author</span>
+		                      </div>
+	                      </div>
+                      </div>
+                    </div>
+                  </div>
+               }
+
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+*@
+<!--------------------------------------------------------------------------------------------------------------------->
+
+<section class="ftco-section ">
+			
+                @RenderBody()
+        </section>
+<!----------------------------------------End Main Section----------------------------------------------------->
+
+
+<!----------------------------------------Stat Footer---------------------------------------------------->
+
+    
+    
+  <footer class="ftco-footer">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-sm-12 col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2 logo"><a href="#">Liquor <span>Store</span></a></h2>
+              <p>Far far away, behind the word mountains, far from the countries.</p>
+              <ul class="ftco-footer-social list-unstyled mt-2">
+                <li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-4">
+              <h2 class="ftco-heading-2">My Accounts</h2>
+              <ul class="list-unstyled">
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>My Account</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Register</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Log In</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>My Order</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-4">
+              <h2 class="ftco-heading-2">Information</h2>
+              <ul class="list-unstyled">
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>About us</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Catalog</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Contact us</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Term &amp; Conditions</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md">
+             <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Quick Link</h2>
+              <ul class="list-unstyled">
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>New User</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Help Center</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Report Spam</a></li>
+                <li><a href="#"><span class="fa fa-chevron-right mr-2"></span>Faq's</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md">
+            <div class="ftco-footer-widget mb-4">
+            	<h2 class="ftco-heading-2">Have a Questions?</h2>
+            	<div class="block-23 mb-3">
+	              <ul>
+	                <li><span class="icon fa fa-map marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+	                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+	                <li><a href="#"><span class="icon fa fa-paper-plane pr-4"></span><span class="text">info@yourdomain.com</span></a></li>
+	              </ul>
+	            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid px-0 py-5 bg-black">
+      	<div class="container">
+      		<div class="row">
+	          <div class="col-md-12">
+		
+	            <p class="mb-0" style="color: rgba(255,255,255,.5);"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+	  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+	  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+	          </div>
+	        </div>
+      	</div>
+      </div>
+    </footer>
+<!----------------------------------------End Footer----------------------------------------------------->
+@*
+
+<script>
+	let arr=[];
+	function add(id){
+		arr.push(id);		
+		localStorage.setItem("Cart",JSON.stringify(arr))
+		let items = JSON.parse(localStorage.getItem("Cart"));
+        $('#card').html(items.length)
+	}
+</script>*@
+  
+<!----------------------------------------Start Script Theme---------------------------------------------------->
+  <script src="~/js/jquery.min.js"></script>
+  <script src="~/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="~/js/popper.min.js"></script>
+  <script src="~/js/bootstrap.min.js"></script>
+  <script src="~/js/jquery.easing.1.3.js"></script>
+  <script src="~/js/jquery.waypoints.min.js"></script>
+  <script src="~/js/jquery.stellar.min.js"></script>
+  <script src="~/js/owl.carousel.min.js"></script>
+  <script src="~/js/jquery.magnific-popup.min.js"></script>
+  <script src="~/js/jquery.animateNumber.min.js"></script>
+  <script src="~/js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="~/js/google-map.js"></script>
+  <script src="~/js/main.js"></script>
+<!----------------------------------------End Script Theme---------------------------------------------------->
+
+
+<!----------------------------------------Form Create----------------------------------------------------------->
+
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <script src="~/vendor/datepicker/moment.min.js"></script>
+    <script src="~/vendor/datepicker/daterangepicker.js"></script>
+    <script src="~/js/global.js"></script>
+
+
+
+<!----------------------------------------Form Create----------------------------------------------------------->
+
+<!----------------------------------------Start Script MVC---------------------------------------------------->
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+<!----------------------------------------End Script MVC---------------------------------------------------->
+
+</body>
+</html>
